@@ -30,22 +30,20 @@ export default function App () {
   }, [contacts]);
 
  const addContact = data => {
-     const newUser = {
+  const newUser = {
     id: nanoid(),
-       name: data.name,
-     number: data.number
-     }
-     const existingContact = this.state.contacts.find((element) =>
-      element.name.toLowerCase() === data.name.toLowerCase()
-    );
-    if(existingContact) {
-      window.alert(`${data.name} is already in contacts`);
-      return;
-    }; 
-     setContacts(prevState => ({
-       contacts: [newUser, ...prevState.contacts]
-     }))
-   }
+    name: data.name,
+    number: data.number
+  };
+  const existingContact = contacts.find(
+    element => element.name.toLowerCase() === data.name.toLowerCase()
+  );
+  if (existingContact) {
+    window.alert(`${data.name} is already in contacts`);
+    return;
+  }
+  setContacts(prevState => [newUser, ...prevState]);
+};
 
    const deleteContact = (contactId) => {
      setContacts(prevState => ({
@@ -53,12 +51,15 @@ export default function App () {
      }))
    }
    const changeFilter = e => {
-     setFilter({filter: e.currentTarget.value})
-   }
-   const getVisibleContacts = () => {
-     const normalizedContacts = filter.toLowerCase();
-     return contacts.filter(contact => contact.name.toLowerCase().includes(normalizedContacts))
-   }
+  setFilter(e.currentTarget.value);
+};
+  const getVisibleContacts = () => {
+    if (typeof filter !== "string") {
+      return contacts;
+    }
+    const normalizedContacts = filter.toLowerCase();
+    return contacts.filter(contact => contact.name.toLowerCase().includes(normalizedContacts))
+  }
    
   const visibleContacts = getVisibleContacts();
 return (
