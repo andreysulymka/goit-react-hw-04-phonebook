@@ -23,7 +23,7 @@ function ContactEditor({addContact}){
     }
 const handleSubmit = e => {
         e.preventDefault();
-        addContact();
+        addContact({name: name, number: number});
     setName();
     setNumber();
     }

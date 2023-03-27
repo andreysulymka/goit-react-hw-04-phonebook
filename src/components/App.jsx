@@ -38,14 +38,18 @@ export default function App () {
   setContacts(prevState => [newUser, ...prevState]);
 };
 
-   const deleteContact = (contactId) => {
-     setContacts(prevState => ({
-       contacts: prevState.contacts.filter(contact=> contact.id !==contactId)
-     }))
-   }
-   const changeFilter = e => {
-  setFilter(e.currentTarget.value);
-};
+  const deleteContact = (contactId) => {
+    setContacts(prevState => prevState.filter(contact => contact.id !== contactId))
+  };
+const changeFilter = (e) => {
+    const value = e.currentTarget.value;
+    if (value === undefined) {
+      setFilter('');
+    } else {
+      setFilter(value);
+    }
+  };
+
   const getVisibleContacts = () => {
     if (typeof filter !== "string") {
       return contacts;
