@@ -2,7 +2,7 @@ import { useState } from "react";
 import PropTypes from 'prop-types';
 import {Form, NameLabel, NameInput, NumberLabel, NumberInput, Button} from './ContactEditor.styled'
 
-function ContactEditor(){
+function ContactEditor({addContact}){
     const [name, setName] = useState("");
     const [number, setNumber] = useState("");
 
@@ -23,10 +23,7 @@ function ContactEditor(){
     }
 const handleSubmit = e => {
         e.preventDefault();
-        this.props.addContact({
-            name,
-            number,
-        });
+        addContact();
     setName();
     setNumber();
     }
